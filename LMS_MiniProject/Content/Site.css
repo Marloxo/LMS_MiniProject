@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#homeImage {
+    /*content: url(http://placehold.it/350x150);*/
+    background-image: url('Images/home_image.jpg');
+   color:white;
+}
