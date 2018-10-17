@@ -17,7 +17,7 @@ namespace LMS_MiniProject.Controllers
         // GET: Book
         public ActionResult Index()
         {
-            return View(db.BookTbls.ToList());
+            return View("Index", db.BookTbls.ToList());
         }
 
         // GET: Book/Details/5
@@ -32,13 +32,13 @@ namespace LMS_MiniProject.Controllers
             {
                 return HttpNotFound();
             }
-            return View(bookTbl);
+            return View("Details", bookTbl);
         }
 
         // GET: Book/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: Book/Create
@@ -48,14 +48,19 @@ namespace LMS_MiniProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Author,Tag,Image,Year_of_publishing")] BookTbl bookTbl)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.BookTbls.Add(bookTbl);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
 
-            return View(bookTbl);
+                    db.BookTbls.Add(bookTbl);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e) { }
+
+            return View("Create", bookTbl);
         }
 
         // GET: Book/Edit/5
@@ -70,7 +75,7 @@ namespace LMS_MiniProject.Controllers
             {
                 return HttpNotFound();
             }
-            return View(bookTbl);
+            return View("Edit", bookTbl);
         }
 
         // POST: Book/Edit/5
@@ -80,13 +85,18 @@ namespace LMS_MiniProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Author,Tag,Image,Year_of_publishing")] BookTbl bookTbl)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(bookTbl).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(bookTbl).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            return View(bookTbl);
+            catch (Exception e) { }
+
+            return View("Edit", bookTbl);
         }
 
         // GET: Book/Delete/5
@@ -101,7 +111,7 @@ namespace LMS_MiniProject.Controllers
             {
                 return HttpNotFound();
             }
-            return View(bookTbl);
+            return View("Delete", bookTbl);
         }
 
         // POST: Book/Delete/5
