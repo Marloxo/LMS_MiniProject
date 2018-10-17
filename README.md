@@ -1,6 +1,8 @@
 # LMS_MiniProject
 
-Mini Library Management System  project for demonstration purpose
+Mini Library Management System  project for demonstration purpose...
+The Library Management System is the tool for organizing, managing, monitoring and controlling
+the transactions of books in the library.
 
 ## Table of Contents
 
