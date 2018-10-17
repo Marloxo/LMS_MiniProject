@@ -10,11 +10,13 @@ using LMS_MiniProject.Models;
 
 namespace LMS_MiniProject.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private LMSDBEntities db = new LMSDBEntities();
 
         // GET: Book
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View("Index", db.BookTbls.ToList());
